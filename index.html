@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Osu Profilim</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background: #f0f0f0;
+        }
+        .profile {
+            background: #fff;
+            display: inline-block;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+        }
+        h1 {
+            margin: 10px 0;
+        }
+        p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="profile">
+    <img id="avatar" src="" alt="Profil Resmi">
+    <h1 id="username">Kullanıcı Adı</h1>
+    <p>PP: <span id="pp">0</span></p>
+    <p>Global Sıra: <span id="global_rank">0</span></p>
+    <p>Ülke Sırası: <span id="country_rank">0</span></p>
+    <p>Ülke: <span id="country">TR</span></p>
+</div>
+
+<script>
+    // JSON dosyasını yükle
+    fetch('osu_data.json')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('avatar').src = data.avatar_url;
+            document.getElementById('username').textContent = data.username;
+            document.getElementById('pp').textContent = data.pp;
+            document.getElementById('global_rank').textContent = data.global_rank;
+            document.getElementById('country_rank').textContent = data.country_rank;
+            document.getElementById('country').textContent = data.country_code;
+        })
+        .catch(err => console.error("JSON yüklenemedi:", err));
+</script>
+
+</body>
+</html>
